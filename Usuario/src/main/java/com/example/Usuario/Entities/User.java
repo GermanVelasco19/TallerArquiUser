@@ -17,10 +17,5 @@ public class User implements Serializable {
     private String password;
     private String token;
     private String birthdate_user;
-    private boolean activo;
-
-    @ManyToOne
-    @JoinColumn(name="city_id")
-    private City city_id;
 
 }

@@ -32,16 +32,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/get_users", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ArrayList<User> getAll() {
-        ArrayList<User> allUsers = user.SearchAll();
-        ArrayList<User> activeUsers = new ArrayList<>();
-
-        for (User u : allUsers) {
-            if (u.isActivo()) {
-                activeUsers.add(u);
-            }
-        }
-
-        return activeUsers;
+        return user.SearchAll();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -129,7 +120,6 @@ public class UserController {
             x.setName_user(u.getName_user());
             x.setLast_name_user(u.getLast_name_user());
             x.setBirthdate_user(u.getBirthdate_user());
-            x.setCity_id(u.getCity_id());
 
             user.UpdateUser(u);
         }else{
@@ -143,7 +133,6 @@ public class UserController {
 
         User userToDelete = user.findOne(id);
         if (userToDelete != null) {
-            userToDelete.setActivo(false);
             user.UpdateUser(userToDelete);
         }
 
