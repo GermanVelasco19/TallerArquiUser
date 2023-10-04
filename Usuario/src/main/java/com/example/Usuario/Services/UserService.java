@@ -23,8 +23,6 @@ public class UserService {
         Repo.save(u);
     }
     public void UpdateUser (User u){
-        System.out.println(u.getName_user());
-
         Repo.save(u);
     }
 

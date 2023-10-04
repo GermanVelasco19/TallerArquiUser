@@ -71,12 +71,15 @@ public class UserController {
     @PostMapping("user")
     @ResponseBody
     public String login(@RequestParam("user") String username,@RequestParam("password") String pwd){
+        System.out.println(pwd);
         ArrayList<User> users = user.SearchAll();
         boolean correcto = false;
         for (int i = 0;i<users.size();i++) {
-            if (users.get(i).getUsername().equals(username)){
-                if(users.get(i).getPassword().equals(pwd) ){
-                    correcto=true;
+            if (!users.get(i).equals(null)) {
+                if (users.get(i).getUsername().equals(username)) {
+                    if (users.get(i).getPassword().equals(pwd)) {
+                        correcto = true;
+                    }
                 }
             }
         }
@@ -115,7 +118,6 @@ public class UserController {
     public void updateUser(@RequestBody User u, @PathVariable Integer id){
         u.setUser_id(id);
         User x =user.findOne(id);
-        System.out.println(x);
         if (x!=null) {
             x.setName_user(u.getName_user());
             x.setLast_name_user(u.getLast_name_user());
@@ -133,7 +135,7 @@ public class UserController {
 
         User userToDelete = user.findOne(id);
         if (userToDelete != null) {
-            user.UpdateUser(userToDelete);
+            user.DeleteUser(id);
         }
 
     }
